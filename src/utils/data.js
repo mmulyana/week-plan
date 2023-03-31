@@ -1,5 +1,10 @@
 const initTodos = [
-  { id: 1, name: 'Monday', data: [], },
+  { id: 1, name: 'Monday', data: [
+    {
+      id: 1,
+      name: 'todo'
+    }
+  ], },
   { id: 2, name: 'Tuesday', data: [], },
   { id: 3, name: 'Wednesday', data: [], },
   { id: 4, name: 'Thursday', data: [], },

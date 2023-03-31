@@ -6,7 +6,7 @@ function App() {
   const [todos, setTodos] = useState(initTodos)
 
   return (
-    <div>
+    <div className='container mx-auto'>
       <TodoWrapper todos={todos} />
     </div>
   )
