@@ -2,7 +2,9 @@ import { createSlice } from '@reduxjs/toolkit'
 import { initTodos } from '../../../utils/data'
 import { nanoid } from 'nanoid'
 
-const initialState = initTodos
+const initialState = localStorage.getItem('TODOS')
+  ? JSON.parse(localStorage.getItem('TODOS'))
+  : initTodos
 
 export const todoSlice = createSlice({
   name: 'todos',
@@ -18,9 +20,14 @@ export const todoSlice = createSlice({
 
       state[id - 1].item.push(newData)
     },
+    removeTodo: (state, action) => {
+      const { id, index } = action.payload
+      const updateData = state[id - 1].item.splice(index, 1)
+      state = updateData
+    },
   },
 })
 
-export const { addTodo } = todoSlice.actions
+export const { addTodo, removeTodo } = todoSlice.actions
 
 export default todoSlice.reducer
