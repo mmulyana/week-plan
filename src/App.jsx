@@ -1,9 +1,8 @@
-import { useState } from 'react'
 import { TodoWrapper } from './components'
-import { initTodos } from './utils/data'
+import { useSelector } from 'react-redux'
 
 function App() {
-  const [todos, setTodos] = useState(initTodos)
+  const todos = useSelector((s) => s.todos)
 
   return (
     <div className='container mx-auto'>
