@@ -16,6 +16,7 @@ export const todoSlice = createSlice({
       const newData = {
         id: nanoid(),
         name,
+        isComplete: false
       }
 
       state[id - 1].item.push(newData)
@@ -25,9 +26,15 @@ export const todoSlice = createSlice({
       const updateData = state[id - 1].item.splice(index, 1)
       state = updateData
     },
+    changeIsComplete: (state, action) => {
+      const {id, index} = action.payload
+      const isComplete = state[id - 1].item[index].isComplete 
+      const updateData = state[id - 1].item[index].isComplete = !isComplete
+      state = updateData
+    }
   },
 })
 
-export const { addTodo, removeTodo } = todoSlice.actions
+export const { addTodo, removeTodo, changeIsComplete } = todoSlice.actions
 
 export default todoSlice.reducer
