@@ -1,14 +1,13 @@
-import { useRef } from 'react'
+import TodoTitle from './TodoTitle'
+import { useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import {
-  addTodo,
-  changeIsComplete,
-  removeTodo,
-} from '../../redux/feature/todos'
+import { addTodo } from '../../redux/feature/todos'
+import { BsPlus } from 'react-icons/bs'
 
 export default function TodoItem({ data }) {
   const inputVal = useRef()
   const dispatch = useDispatch()
+  const [isOpen, setIsOpen] = useState(false)
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -21,43 +20,38 @@ export default function TodoItem({ data }) {
     dispatch(addTodo(payload))
   }
 
-  function handleDelete(index) {
-    const payload = {
-      id: data.id,
-      index,
-    }
-    dispatch(removeTodo(payload))
-  }
-
-  function handleIsComplete(index) {
-    const payload = {
-      id: data.id,
-      index,
-    }
-    dispatch(changeIsComplete(payload))
-  }
-
   return (
-    <div className='min-h-20 bg-gray-100 rounded overflow-hidden'>
-      <div className='w-full h-12 bg-white flex items-center justify-center'>
-        {data.name}
+    <div className='min-h-20'>
+      <div className='w-full h-12 flex items-center justify-between px-2'>
+        <p className='text-slate-700'>{data.name}</p>
+        <div className='flex items-center gap-2'>
+          <button className='text-gray-400' onClick={() => setIsOpen(!isOpen)}>
+            <BsPlus />
+          </button>
+        </div>
       </div>
-      {data.item.length > 0 &&
-        data.item.map((dataItem, index) => (
-          <div key={index} className='flex justify-between items-center'>
-            <p
-              onClick={() => handleIsComplete(index)}
-              className={dataItem.isComplete ? 'line-through' : null}
-            >
-              {dataItem.name}
-            </p>
-            <span onClick={() => handleDelete(index)}>x</span>
-          </div>
-        ))}
-      <form onSubmit={handleSubmit}>
-        <input type='text' ref={inputVal} />
-        <button hidden type='submit' />
-      </form>
+
+      <div className='mt-1 px-2'>
+        {data.item.length > 0 &&
+          data.item.map((dataItem, index) => (
+            <TodoTitle key={index} data={dataItem} />
+          ))}
+      </div>
+
+      {!!isOpen && (
+        <div className='w-full px-2 mt-2'>
+          <form onSubmit={handleSubmit}>
+            <input
+              type='text'
+              ref={inputVal}
+              autoFocus
+              className='w-full py-1 px-2'
+              onBlur={() => setIsOpen(false)}
+            />
+            <button hidden type='submit' />
+          </form>
+        </div>
+      )}
     </div>
   )
 }

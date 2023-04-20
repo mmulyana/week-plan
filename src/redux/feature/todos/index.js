@@ -16,25 +16,47 @@ export const todoSlice = createSlice({
       const newData = {
         id: nanoid(),
         name,
-        isComplete: false
+        isComplete: false,
       }
 
-      state[id - 1].item.push(newData)
+      state[id].item.push(newData)
     },
     removeTodo: (state, action) => {
-      const { id, index } = action.payload
-      const updateData = state[id - 1].item.splice(index, 1)
-      state = updateData
+      const { id } = action.payload
+      const newData = state.map((data) => {
+        data.item.forEach((item, index) => {
+          if (item.id === id) {
+            data.item.splice(index, 1)
+          }
+        })
+      })
     },
     changeIsComplete: (state, action) => {
-      const {id, index} = action.payload
-      const isComplete = state[id - 1].item[index].isComplete 
-      const updateData = state[id - 1].item[index].isComplete = !isComplete
-      state = updateData
-    }
+      const { id } = action.payload
+      const newData = state.map((data) => {
+        data.item.forEach((item) => {
+          if (item.id === id) {
+            item.isComplete = !item.isComplete
+          }
+        })
+      })
+    },
+    changeTodo: (state, action) => {
+      const { id, name } = action.payload
+      const newData = state.map((data) => {
+        data.item.forEach((item) => {
+          if (item.id === id) {
+            item.name = name
+          }
+        })
+      })
+
+      // console.log(newData)
+    },
   },
 })
 
-export const { addTodo, removeTodo, changeIsComplete } = todoSlice.actions
+export const { addTodo, removeTodo, changeIsComplete, changeTodo } =
+  todoSlice.actions
 
 export default todoSlice.reducer
