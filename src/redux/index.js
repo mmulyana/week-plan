@@ -1,10 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
-import todosSlice from './feature/todos'
+import rootReducer from './feature'
 
 const store = configureStore({
-  reducer: {
-    todos: todosSlice,
-  },
+  reducer: rootReducer,
 })
 
 store.subscribe(() => {

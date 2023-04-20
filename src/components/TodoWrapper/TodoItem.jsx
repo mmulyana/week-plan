@@ -25,7 +25,7 @@ export default function TodoItem({ data }) {
       <div className='w-full h-12 flex items-center justify-between px-2'>
         <p className='text-slate-700'>{data.name}</p>
         <div className='flex items-center gap-2'>
-          <button className='text-gray-400' onClick={() => setIsOpen(!isOpen)}>
+          <button className='text-slate-400 hover:text-slate-800 hover:bg-gray-100 h-5 w-5 flex items-center justify-center rounded' onClick={() => setIsOpen(!isOpen)}>
             <BsPlus />
           </button>
         </div>

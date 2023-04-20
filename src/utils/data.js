@@ -1,5 +1,8 @@
 const initTodos = [
-  { id: 0, name: 'Monday', item: [] },
+  { id: 0, name: 'Monday', item: [{
+    id: 1,
+    name: 'reading book'
+  }] },
   { id: 1, name: 'Tuesday', item: [] },
   { id: 2, name: 'Wednesday', item: [] },
   { id: 3, name: 'Thursday', item: [] },
