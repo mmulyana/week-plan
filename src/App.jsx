@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <Navbar />
-      <div className='container mx-auto mt-16 px-4'>
+      <div className='container mx-auto mt-20 px-4'>
         <TodoWrapper todos={todos} />
       </div>
     </>

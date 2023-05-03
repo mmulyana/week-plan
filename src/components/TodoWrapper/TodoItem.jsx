@@ -21,7 +21,7 @@ export default function TodoItem({ data }) {
   }
 
   return (
-    <div className='min-h-20'>
+    <div className='h-fit pb-2 rounded-lg border-[4px] border-[#33322E] bg-[#f2e2bf] shadow-[8px_8px_0_0_rgb(51,50,46)]'>
       <div className='w-full h-12 flex items-center justify-between px-2'>
         <p className='text-slate-700'>{data.name}</p>
         <div className='flex items-center gap-2'>
