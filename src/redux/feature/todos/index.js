@@ -19,7 +19,7 @@ export const todoSlice = createSlice({
         isComplete: false,
       }
 
-      state[id-1].item.push(newData)
+      state[id].item.push(newData)
     },
     removeTodo: (state, action) => {
       const { id } = action.payload
